@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Attach to Weather Service",
+            "type": "debugpy", 
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5679
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "${workspaceFolder}" // Fix this line
+                }
+            ],
+            "justMyCode": false // Add this line
+        }
+    ]
+}
