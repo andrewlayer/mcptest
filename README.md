@@ -17,7 +17,12 @@ This project shows MCP Server support using HTTP transport mechanism. I personal
 
 ![Inspector Tool](connect.png)
 
-4. Congrats! You are now connected to the server.  You can now send and receive messages using the inspector tool.
+4. Congrats! You are now connected to the server.  You can now send and receive messages using the inspector tool. Hit any of the buttons like `list resources` or `get resource` to see the server in action.  All responses are dummy responses.
+
+# TODO:
+- [ ] Implement sampling (this is a sick feature btw)
+
+
 
 # Known Issues
 For some reason the Hot Reload on this server is not working properly (The server hangs waiting).  Just restart the server and it will start up again (Or fix it, submit a PR and you will be my hero).
