@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Attach to Weather Service",
+            "name": "Attach to Server",
             "type": "debugpy", 
             "request": "attach",
             "connect": {

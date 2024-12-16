@@ -4,34 +4,43 @@ from h11 import Request
 from mcp import Tool
 from mcp.types import Resource, ResourceTemplate, Prompt, PromptArgument, GetPromptResult, PromptMessage, TextContent, ImageContent, EmbeddedResource
 from pydantic import AnyUrl
-from regex import T
 import uvicorn
 from mcp.server import Server
 from mcp.server.sse import SseServerTransport
 from starlette.applications import Starlette
 from starlette.routing import Route
 
-from OpenAPIToolGenerator import OpenAPIToolGenerator
-from parse import OpenAPIParser
-
 # Create SSE transport with endpoint
 sse = SseServerTransport("/messages")
 app = Server("test")
-
-
 
 @app.call_tool()
 async def call_tool(name: str, arguments: dict[str, str] | None) -> Sequence[TextContent | ImageContent | EmbeddedResource]:
     result = f"Calculated result: {arguments}"  
     return [TextContent(type="text", text=result)]
 
-parser = OpenAPIParser('./neon.json')
-tool_generator = OpenAPIToolGenerator.from_parser(parser)
-tools = tool_generator.generate_tools()
-
 @app.list_tools()
 async def list_tools() -> list[Tool]:
-    return tools
+    return [
+        Tool(
+            name="add",
+            description="Add two numbers together",
+            inputSchema={
+                "type": "object",
+                "required": ["a", "b"],
+                "properties": {
+                    "a": {
+                        "type": "number",
+                        "description": "First number to add"
+                    },
+                    "b": {
+                        "type": "number", 
+                        "description": "Second number to add"
+                    }
+                }
+            }
+        )
+    ]
         
 
 @app.get_prompt()
